@@ -37,9 +37,9 @@ class Object
 {
 public:
 	Object() {};
-	int x = 0;
-	int y = 0;
-	int z = 0;
+	float x = 0;
+	float y = 0;
+	float z = 0;
 
 	virtual void Update()
 	{
@@ -52,13 +52,53 @@ private:
 class Vehicle : public Object
 {
 public:
+	virtual void setSpeed(float s)
+	{
+		speed = s;
+	}
+
+	virtual void setAccel(float a)
+	{
+		accel = a;
+	}
+
+	virtual float getSpeed()
+	{
+		float getS = speed;
+		printf("%f\n", getS);
+		return getS;
+	}
+
+	virtual float getAccel()
+	{
+		float getA = accel;
+		printf("%f\n", getA);
+		return getA;
+	}
 
 private:
+	float s = 0;
+	float a = 0;
 };
 
 class Car : public Vehicle
 {
 public:
+	virtual void SpeedUp()
+	{
+		float s = getSpeed();
+		float a = getAccel();
+		s += a;
+		setSpeed(s);
+	}
+
+	virtual void SpeedDown()
+	{
+		float s = getSpeed();
+		float a = getAccel();
+		s -= a;
+		setSpeed(s);
+	}
 
 private:
 
@@ -66,5 +106,9 @@ private:
 
 int main()
 {
-
-}
+	Car car;
+	car.setSpeed(80);
+	car.setAccel(10);
+	car.SpeedUp();
+	car.getSpeed()
+};
